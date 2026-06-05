@@ -45,6 +45,18 @@ Everything started from there uses the VPN IP; everything else on the box does n
 
 ---
 
+## Requirements
+
+- Linux server with root access
+- OpenVPN config file (`.ovpn`)
+- `openvpn`
+- `iproute2`
+- `iptables`
+- `curl`
+- `systemd` (optional, for auto-start on boot)
+
+---
+
 ## Quick start
 
 ```bash
