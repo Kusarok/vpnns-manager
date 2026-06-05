@@ -11,3 +11,6 @@ auth.txt
 
 # Logs
 *.log
+
+# Local-only promotion notes (never published)
+PROMOTE.md

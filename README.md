@@ -9,11 +9,12 @@
   <img src="https://img.shields.io/badge/VPN-OpenVPN%20%2F%20NordVPN-EA7E20">
   <img src="https://img.shields.io/badge/linux-network%20namespace-FCC624?logo=linux&logoColor=black">
   <img src="https://img.shields.io/badge/systemd-ready-30A0E0">
+  <img src="https://img.shields.io/badge/tested%20on-Ubuntu%2022.04%20%2F%2024.04-E95420?logo=ubuntu&logoColor=white">
 </p>
 
 `vpnns-manager` is a small, dependency-free Bash tool that puts **one application inside an isolated Linux network namespace** and routes only that namespace through an OpenVPN (or NordVPN) tunnel. Your SSH session, package updates, and everything else on the host keep using the server's real IP — only the app you choose exits through the VPN.
 
-It is **interactive** (asks for your `.ovpn` path, VPN username and password, then wires everything up for you), **idempotent** (safe to re-run), and **systemd-ready** (survives reboots).
+It is **interactive** (asks for your `.ovpn` path, VPN username and password, then wires everything up for you), **idempotent** (safe to re-run), and **systemd-ready** (survives reboots). Tested on Ubuntu 22.04 / 24.04 with OpenVPN 2.5+.
 
 ---
 
@@ -78,6 +79,24 @@ During `init` you are asked for:
 - Optional app directory and command
 
 The tool **copies** your `.ovpn` to `/etc/vpnns/`, injects `auth-user-pass` pointing at your credentials file, and adds `pull-filter ignore "dhcp-option DNS"` so the namespace DNS stays correct. **Your original `.ovpn` is never modified.**
+
+---
+
+## Example output
+
+`status` proves the isolation at a glance — the host keeps its real IP while the namespace exits through the VPN:
+
+```text
+$ sudo ./vpnns.sh status
+Namespace          : vpnns
+OpenVPN            : 48213
+Tunnel             : tun0
+Host public IP     : 203.0.113.10      # your VPS / SSH stays here
+Namespace public IP: 185.244.214.7     # the app exits via the VPN
+Result             : OK — namespace traffic is going through the VPN.
+----- last log lines (/var/log/vpnns-vpnns.log) -----
+... Initialization Sequence Completed
+```
 
 ---
 
