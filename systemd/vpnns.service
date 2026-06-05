@@ -1,0 +1,15 @@
+[Unit]
+Description=VPN network namespace (vpnns-manager)
+Documentation=https://github.com/Kusarok/vpnns-manager
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/vpnns.sh up
+ExecStop=/usr/local/bin/vpnns.sh stop
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

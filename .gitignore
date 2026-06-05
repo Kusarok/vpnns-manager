@@ -1,0 +1,13 @@
+# Never commit secrets or server-specific files
+*.ovpn
+auth.txt
+*.key
+*.crt
+*.pem
+
+# Real config (only the .example is tracked)
+*.conf
+!vpnns.conf.example
+
+# Logs
+*.log

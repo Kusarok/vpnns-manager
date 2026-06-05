@@ -1,0 +1,34 @@
+# vpnns-manager configuration example
+# Copy is normally generated automatically by: sudo ./vpnns.sh init
+# The real config lives at /etc/vpnns/vpnns.conf and must NOT be committed.
+
+# Namespace name
+NS_NAME="vpnns"
+
+# veth pair names (host side / namespace side)
+VETH_HOST="vh-vpnns"
+VETH_NS="vp-vpnns"
+
+# Private /24 used between host and namespace
+SUBNET="10.200.1"
+HOST_IP="10.200.1.1"
+NS_IP="10.200.1.2"
+
+# DNS servers used inside the namespace (space separated)
+DNS="1.1.1.1 8.8.8.8"
+
+# Edited OpenVPN config copy (created by init; original file is left untouched)
+OVPN_WORK="/etc/vpnns/your-server.ovpn"
+
+# OpenVPN credentials file (username on line 1, password on line 2; chmod 600)
+AUTH_FILE="/etc/vpnns/auth.txt"
+
+# Optional: app to run inside the namespace via './vpnns.sh run'
+APP_DIR=""
+APP_CMD=""
+
+# Log file for the OpenVPN process
+LOG_FILE="/var/log/vpnns-vpnns.log"
+
+# External interface for NAT. Leave empty for auto-detection, or pin (e.g. eth0).
+EXT_IF=""
